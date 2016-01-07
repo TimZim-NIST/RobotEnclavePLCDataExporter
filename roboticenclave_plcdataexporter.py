@@ -62,14 +62,14 @@ if client.connect() == True:
     f.close()
     print ("[DONE]\nSuccessfully exported " + str(part-1) + " records.")
     
-    # Allow the user to clear the data from the PLC
-    print ("\nClear all experiment data from the PLC?")
-    clear_plc_data = input("y or n: ")
-    clear_plc_data = clear_plc_data.upper
-    if clear_plc_data == "Y" or clear_plc_data == "YES" or \
-       clear_plc_data == "YEAH" or clear_plc_data == "SURE" or \
-       clear_plc_data == "FINE" or clear_plc_data == "IF YOU INSIST":
-        client.write_coil(0x8002, 1)
-        client.write_coil(0x8003, 1)
+#    # Allow the user to clear the data from the PLC
+#    print ("\nClear all experiment data from the PLC?")
+#    clear_plc_data = input("y or n: ")
+#    clear_plc_data = clear_plc_data.upper
+#    if clear_plc_data == "Y" or clear_plc_data == "YES" or \
+#       clear_plc_data == "YEAH" or clear_plc_data == "SURE" or \
+#       clear_plc_data == "FINE" or clear_plc_data == "IF YOU INSIST":
+#        client.write_coil(0x8002, 1)
+#        client.write_coil(0x8003, 1)
     print ("Exiting...")
     exit
