@@ -22,7 +22,7 @@ client = ModbusClient(mb_server_ip, mb_server_port)
 if client.connect() == True:    
     print("Successfully connected to " + mb_server_ip + ":" + mb_server_port)
     
-    print("Creating data file...",end="")
+    print("Creating data file...")
     # Build the file name
     curr_date = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
     fname = "./PLCData-" + str(curr_date) + ".csv"
@@ -34,7 +34,7 @@ if client.connect() == True:
     f.write("sn,sta1_delay,sta2_delay,sta3_delay,sta4_delay,sta6_delay,sta1_to_sta2_delay,sta2_to_sta3_delay,sta3_to_sta4_delay,sta6_to_sta1_delay,inspection_result\n")
     print("[DONE]")
     
-    print("Exporting data...",end="")
+    print("Exporting data...")
     # Maximum parts the PLC can track is currently 512; iterate through all
     for part in range(1,512):
         # Inform the PLC task which index we want to read
