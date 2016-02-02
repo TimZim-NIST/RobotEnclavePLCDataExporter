@@ -121,10 +121,10 @@ this_xlim_max = max(sta6_to_sta1_delay_msec) + 0.1;
 this_xlim_min = min(sta6_to_sta1_delay_msec) - 0.1;
 xlim([this_xlim_min this_xlim_max]);
 
-fprintf('Minimum Time: \t%f seconds\n', this_xlim_min)
-fprintf('Maximum Time: \t%f seconds\n', this_xlim_max)
-fprintf('Mean Time: \t%f seconds\n', mean(sta6_to_sta1_delay_msec))
-fprintf('Std. Dev.: \t±%f seconds\n', std(sta6_to_sta1_delay_msec))
+fprintf('Minimum Time: \t%.3f seconds\n', this_xlim_min)
+fprintf('Maximum Time: \t%.3f seconds\n', this_xlim_max)
+fprintf('Mean Time: \t%.3f seconds\n', mean(sta6_to_sta1_delay_msec))
+fprintf('Std. Dev.: \t±%.3f seconds\n', std(sta6_to_sta1_delay_msec))
 
 
 %% Station 1 Delay
@@ -140,10 +140,10 @@ this_xlim_max = max(sta1_delay_msec) + 0.1;
 this_xlim_min = min(sta1_delay_msec) - 0.1;
 xlim([this_xlim_min this_xlim_max]);
 
-fprintf('Minimum Time: \t%f seconds\n', this_xlim_min)
-fprintf('Maximum Time: \t%f seconds\n', this_xlim_max)
-fprintf('Mean Time: \t%f seconds\n', mean(sta1_delay_msec))
-fprintf('Std. Dev.: \t±%f seconds\n', std(sta1_delay_msec))
+fprintf('Minimum Time: \t%.3f seconds\n', this_xlim_min)
+fprintf('Maximum Time: \t%.3f seconds\n', this_xlim_max)
+fprintf('Mean Time: \t%.3f seconds\n', mean(sta1_delay_msec))
+fprintf('Std. Dev.: \t±%.3f seconds\n', std(sta1_delay_msec))
 
 %% Station 1 to Station 2 Delay
 h2 = histogram(sta1_to_sta2_delay_msec(:,1), hist_containers);
@@ -158,10 +158,10 @@ this_xlim_max = max(sta1_to_sta2_delay_msec) + 0.1;
 this_xlim_min = min(sta1_to_sta2_delay_msec) - 0.1;
 xlim([this_xlim_min this_xlim_max]);
 
-fprintf('Minimum Time: \t%f seconds\n', this_xlim_min)
-fprintf('Maximum Time: \t%f seconds\n', this_xlim_max)
-fprintf('Mean Time: \t%f seconds\n', mean(sta1_to_sta2_delay_msec))
-fprintf('Std. Dev.: \t±%f seconds\n', std(sta1_to_sta2_delay_msec))
+fprintf('Minimum Time: \t%.3f seconds\n', this_xlim_min)
+fprintf('Maximum Time: \t%.3f seconds\n', this_xlim_max)
+fprintf('Mean Time: \t%.3f seconds\n', mean(sta1_to_sta2_delay_msec))
+fprintf('Std. Dev.: \t±%.3f seconds\n', std(sta1_to_sta2_delay_msec))
 
 %% Station 2 Delay
 h2 = histogram(sta2_delay_msec(:,1), hist_containers);
@@ -176,10 +176,10 @@ this_xlim_max = max(sta2_delay_msec) + 0.1;
 this_xlim_min = min(sta2_delay_msec) - 0.1;
 xlim([this_xlim_min this_xlim_max]);
 
-fprintf('Minimum Time: \t%f seconds\n', this_xlim_min)
-fprintf('Maximum Time: \t%f seconds\n', this_xlim_max)
-fprintf('Mean Time: \t%f seconds\n', mean(sta2_delay_msec))
-fprintf('Std. Dev.: \t±%f seconds\n', std(sta2_delay_msec))
+fprintf('Minimum Time: \t%.3f seconds\n', this_xlim_min)
+fprintf('Maximum Time: \t%.3f seconds\n', this_xlim_max)
+fprintf('Mean Time: \t%.3f seconds\n', mean(sta2_delay_msec))
+fprintf('Std. Dev.: \t±%.3f seconds\n', std(sta2_delay_msec))
 
 %% Station 2 to Station 3 Delay
 h2 = histogram(sta2_to_sta3_delay_msec(:,1), hist_containers);
@@ -194,10 +194,10 @@ this_xlim_max = max(sta2_to_sta3_delay_msec) + 0.1;
 this_xlim_min = min(sta2_to_sta3_delay_msec) - 0.1;
 xlim([this_xlim_min this_xlim_max]);
 
-fprintf('Minimum Time: \t%f seconds\n', this_xlim_min)
-fprintf('Maximum Time: \t%f seconds\n', this_xlim_max)
-fprintf('Mean Time: \t%f seconds\n', mean(sta2_to_sta3_delay_msec))
-fprintf('Std. Dev.: \t±%f seconds\n', std(sta2_to_sta3_delay_msec))
+fprintf('Minimum Time: \t%.3f seconds\n', this_xlim_min)
+fprintf('Maximum Time: \t%.3f seconds\n', this_xlim_max)
+fprintf('Mean Time: \t%.3f seconds\n', mean(sta2_to_sta3_delay_msec))
+fprintf('Std. Dev.: \t±%.3f seconds\n', std(sta2_to_sta3_delay_msec))
 
 %% Station 3 Delay
 h2 = histogram(sta3_delay_msec(:,1), hist_containers);
@@ -212,10 +212,10 @@ this_xlim_max = max(sta3_delay_msec) + 0.1;
 this_xlim_min = min(sta3_delay_msec) - 0.1;
 xlim([this_xlim_min this_xlim_max]);
 
-fprintf('Minimum Time: \t%f seconds\n', this_xlim_min)
-fprintf('Maximum Time: \t%f seconds\n', this_xlim_max)
-fprintf('Mean Time: \t%f seconds\n', mean(sta3_delay_msec))
-fprintf('Std. Dev.: \t±%f seconds\n', std(sta3_delay_msec))
+fprintf('Minimum Time: \t%.3f seconds\n', this_xlim_min)
+fprintf('Maximum Time: \t%.3f seconds\n', this_xlim_max)
+fprintf('Mean Time: \t%.3f seconds\n', mean(sta3_delay_msec))
+fprintf('Std. Dev.: \t±%.3f seconds\n', std(sta3_delay_msec))
 
 %% Station 3 to Station 4 Delay
 h2 = histogram(sta3_to_sta4_delay_msec(:,1), hist_containers);
@@ -230,10 +230,10 @@ this_xlim_max = max(sta3_to_sta4_delay_msec) + 0.1;
 this_xlim_min = min(sta3_to_sta4_delay_msec) - 0.1;
 xlim([this_xlim_min this_xlim_max]);
 
-fprintf('Minimum Time: \t%f seconds\n', this_xlim_min)
-fprintf('Maximum Time: \t%f seconds\n', this_xlim_max)
-fprintf('Mean Time: \t%f seconds\n', mean(sta3_to_sta4_delay_msec))
-fprintf('Std. Dev.: \t±%f seconds\n', std(sta3_to_sta4_delay_msec))
+fprintf('Minimum Time: \t%.3f seconds\n', this_xlim_min)
+fprintf('Maximum Time: \t%.3f seconds\n', this_xlim_max)
+fprintf('Mean Time: \t%.3f seconds\n', mean(sta3_to_sta4_delay_msec))
+fprintf('Std. Dev.: \t±%.3f seconds\n', std(sta3_to_sta4_delay_msec))
 
 %% Station 4 Delay
 h2 = histogram(sta4_delay_msec(:,1), hist_containers);
@@ -248,10 +248,10 @@ this_xlim_max = max(sta4_delay_msec) + 0.1;
 this_xlim_min = min(sta4_delay_msec) - 0.1;
 xlim([this_xlim_min this_xlim_max]);
 
-fprintf('Minimum Time: \t%f seconds\n', this_xlim_min)
-fprintf('Maximum Time: \t%f seconds\n', this_xlim_max)
-fprintf('Mean Time: \t%f seconds\n', mean(sta4_delay_msec))
-fprintf('Std. Dev.: \t±%f seconds\n', std(sta4_delay_msec))
+fprintf('Minimum Time: \t%.3f seconds\n', this_xlim_min)
+fprintf('Maximum Time: \t%.3f seconds\n', this_xlim_max)
+fprintf('Mean Time: \t%.3f seconds\n', mean(sta4_delay_msec))
+fprintf('Std. Dev.: \t±%.3f seconds\n', std(sta4_delay_msec))
 
 %% Station 6 Delay
 h2 = histogram(sta6_delay_msec(:,1), hist_containers);
@@ -266,10 +266,10 @@ this_xlim_max = max(sta6_delay_msec) + 0.1;
 this_xlim_min = min(sta6_delay_msec) - 0.1;
 xlim([this_xlim_min this_xlim_max]);
 
-fprintf('Minimum Time: \t%f seconds\n', this_xlim_min)
-fprintf('Maximum Time: \t%f seconds\n', this_xlim_max)
-fprintf('Mean Time: \t%f seconds\n', mean(sta6_delay_msec))
-fprintf('Std. Dev.: \t±%f seconds\n', std(sta6_delay_msec))
+fprintf('Minimum Time: \t%.3f seconds\n', this_xlim_min)
+fprintf('Maximum Time: \t%.3f seconds\n', this_xlim_max)
+fprintf('Mean Time: \t%.3f seconds\n', mean(sta6_delay_msec))
+fprintf('Std. Dev.: \t±%.3f seconds\n', std(sta6_delay_msec))
 
 %% Total Production Time
 h2 = histogram(total_part_time(:,1), hist_containers);
@@ -284,10 +284,10 @@ this_xlim_max = max(total_part_time) + 0.1;
 this_xlim_min = min(total_part_time) - 0.1;
 xlim([this_xlim_min this_xlim_max]);
 
-fprintf('Minimum Time: \t%f seconds\n', this_xlim_min)
-fprintf('Maximum Time: \t%f seconds\n', this_xlim_max)
-fprintf('Mean Time: \t%f seconds\n', mean(total_part_time))
-fprintf('Std. Dev.: \t±%f seconds\n', std(total_part_time))
-fprintf('Bin Width: \t%f seconds\n', h2.BinWidth)
+fprintf('Minimum Time: \t%.3f seconds\n', this_xlim_min)
+fprintf('Maximum Time: \t%.3f seconds\n', this_xlim_max)
+fprintf('Mean Time: \t%.3f seconds\n', mean(total_part_time))
+fprintf('Std. Dev.: \t±%.3f seconds\n', std(total_part_time))
+fprintf('Bin Width: \t%.3f seconds\n', h2.BinWidth)
 
 

@@ -27,7 +27,7 @@ if client.connect() == True:
     
     print("Creating metadata file..."),
     # Build the file name
-    fname = "./PLCData-" + str(curr_date) + "-" + str(curr_time) + ".dat"
+    fname = "./data/PLCData-" + str(curr_date) + "-" + str(curr_time) + ".dat"
     try:
         mf = open(fname, 'w')
     except:
@@ -51,10 +51,10 @@ if client.connect() == True:
     # Build the experiment strings based on the returned data
     if exp_settings.registers[0] == 1:
         exp_mode = "Timer"
-        exp_val = str(exp_settings.registers[1]) + " seconds"
+        exp_val = str(exp_settings.registers[1])
     elif exp_settings.registers[0] == 2:
         exp_mode = "Part_Counter"
-        exp_val = str(exp_settings.registers[1]) + " parts"
+        exp_val = str(exp_settings.registers[1])
     else:
         exp_mode = "Free_Run"
         exp_val = "N/A"
@@ -65,20 +65,21 @@ if client.connect() == True:
     mf.write("Time: " + str(curr_time) + "\n")
     mf.write("Experiment_Mode: " + exp_mode + "\n")
     mf.write("Experiment_Value: " + exp_val + "\n")
-    mf.write("Station_1_ProcessingTime: " + str(enclave_data.registers[1]) + " milliseconds\n")
-    mf.write("Station_2_ProcessingTime: " + str(enclave_data.registers[2]) + " milliseconds\n")
-    mf.write("Station_3_ProcessingTime: " + str(enclave_data.registers[3]) + " milliseconds\n")
-    mf.write("Station_4_ProcessingTime: " + str(enclave_data.registers[4]) + " milliseconds\n")
+    mf.write("Station_1_ProcessingTime: " + str(enclave_data.registers[1]) + "\n")
+    mf.write("Station_2_ProcessingTime: " + str(enclave_data.registers[2]) + "\n")
+    mf.write("Station_3_ProcessingTime: " + str(enclave_data.registers[3]) + "\n")
+    mf.write("Station_4_ProcessingTime: " + str(enclave_data.registers[4]) + "\n")
     mf.write("Total_Parts: " + str(enclave_data.registers[0]) + "\n")
     mf.write("Good_Parts: --\n")
     mf.write("Rejected_Parts: --\n")
     mf.write("Alarms: --\n")
     # We're done with the file, so close it
     mf.close()
+    print("[DONE]")
     
     print("Creating data file..."),
     # Build the file name
-    fname = "./PLCData-" + str(curr_date) + "-" + str(curr_time) + ".csv"
+    fname = "./data/PLCData-" + str(curr_date) + "-" + str(curr_time) + ".csv"
     try:
         df = open(fname, 'w')
     except:
