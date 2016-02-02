@@ -36,8 +36,10 @@ delay_data = importdata(metadata_data_file, ',');
 % Calculate size of original array
 orig_arr_size = size(delay_data.data,1);
 
-% Define the number of histogram containers
+% Define the number of histogram containers (overridden by hist_binwidth)
 hist_containers = 15;
+% Define the width of the histogram bins
+hist_binwidth = 0.05;
 
 % Initialize the data arrays
 sta1_delay_msec = [];
@@ -109,7 +111,7 @@ disp(ignored_parts)
 %% Station 6 to Station 1 Delay
 h2 = histogram(sta6_to_sta1_delay_msec(:,1), hist_containers);
 h2.Normalization = 'count';
-%h2.BinWidth = 0.05;
+h2.BinWidth = hist_binwidth;
 grid on;
 grid minor;
 xlabel('seconds')
@@ -128,7 +130,7 @@ fprintf('Std. Dev.: \t±%f seconds\n', std(sta6_to_sta1_delay_msec))
 %% Station 1 Delay
 h2 = histogram(sta1_delay_msec(:,1), hist_containers);
 h2.Normalization = 'count';
-%h2.BinWidth = 0.05;
+h2.BinWidth = hist_binwidth;
 grid on;
 grid minor;
 xlabel('seconds')
@@ -146,7 +148,7 @@ fprintf('Std. Dev.: \t±%f seconds\n', std(sta1_delay_msec))
 %% Station 1 to Station 2 Delay
 h2 = histogram(sta1_to_sta2_delay_msec(:,1), hist_containers);
 h2.Normalization = 'count';
-%h2.BinWidth = 0.05;
+h2.BinWidth = hist_binwidth;
 grid on;
 grid minor;
 xlabel('seconds')
@@ -164,7 +166,7 @@ fprintf('Std. Dev.: \t±%f seconds\n', std(sta1_to_sta2_delay_msec))
 %% Station 2 Delay
 h2 = histogram(sta2_delay_msec(:,1), hist_containers);
 h2.Normalization = 'count';
-%h2.BinWidth = 0.05;
+h2.BinWidth = hist_binwidth;
 grid on;
 grid minor;
 xlabel('seconds')
@@ -182,7 +184,7 @@ fprintf('Std. Dev.: \t±%f seconds\n', std(sta2_delay_msec))
 %% Station 2 to Station 3 Delay
 h2 = histogram(sta2_to_sta3_delay_msec(:,1), hist_containers);
 h2.Normalization = 'count';
-%h2.BinWidth = 0.05;
+h2.BinWidth = hist_binwidth;
 grid on;
 grid minor;
 xlabel('seconds')
@@ -200,7 +202,7 @@ fprintf('Std. Dev.: \t±%f seconds\n', std(sta2_to_sta3_delay_msec))
 %% Station 3 Delay
 h2 = histogram(sta3_delay_msec(:,1), hist_containers);
 h2.Normalization = 'count';
-%h2.BinWidth = 0.05;
+h2.BinWidth = hist_binwidth;
 grid on;
 grid minor;
 xlabel('seconds')
@@ -218,7 +220,7 @@ fprintf('Std. Dev.: \t±%f seconds\n', std(sta3_delay_msec))
 %% Station 3 to Station 4 Delay
 h2 = histogram(sta3_to_sta4_delay_msec(:,1), hist_containers);
 h2.Normalization = 'count';
-%h2.BinWidth = 0.05;
+h2.BinWidth = hist_binwidth;
 grid on;
 grid minor;
 xlabel('seconds')
@@ -236,7 +238,7 @@ fprintf('Std. Dev.: \t±%f seconds\n', std(sta3_to_sta4_delay_msec))
 %% Station 4 Delay
 h2 = histogram(sta4_delay_msec(:,1), hist_containers);
 h2.Normalization = 'count';
-%h2.BinWidth = 0.05;
+h2.BinWidth = hist_binwidth;
 grid on;
 grid minor;
 xlabel('seconds')
@@ -254,7 +256,7 @@ fprintf('Std. Dev.: \t±%f seconds\n', std(sta4_delay_msec))
 %% Station 6 Delay
 h2 = histogram(sta6_delay_msec(:,1), hist_containers);
 h2.Normalization = 'count';
-%h2.BinWidth = 0.05;
+h2.BinWidth = hist_binwidth;
 grid on;
 grid minor;
 xlabel('seconds')
@@ -272,7 +274,7 @@ fprintf('Std. Dev.: \t±%f seconds\n', std(sta6_delay_msec))
 %% Total Production Time
 h2 = histogram(total_part_time(:,1), hist_containers);
 h2.Normalization = 'count';
-%h2.BinWidth = 0.05;
+h2.BinWidth = 0.2;
 grid on;
 grid minor;
 xlabel('seconds');
@@ -286,5 +288,6 @@ fprintf('Minimum Time: \t%f seconds\n', this_xlim_min)
 fprintf('Maximum Time: \t%f seconds\n', this_xlim_max)
 fprintf('Mean Time: \t%f seconds\n', mean(total_part_time))
 fprintf('Std. Dev.: \t±%f seconds\n', std(total_part_time))
+fprintf('Bin Width: \t%f seconds\n', h2.BinWidth)
 
 
