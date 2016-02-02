@@ -34,6 +34,48 @@ if client.connect() == True:
         print("Error creating the metadata file!")
     print("[DONE]")
     
+    print("Exporting data..."),
+
+    # Grab the number of finished parts, and station processing times
+    # 0x8000 = Finished Parts
+    # 0x8001 = Station 1 Process Time
+    # 0x8002 = Station 2 Process Time
+    # 0x8003 = Station 3 Process Time
+    # 0x8004 = Station 4 Process Time
+    enclave_data = client.read_holding_registers(0x8000, 5)
+    # Grab the experiment mode and value
+    # 0x8009 = Experiment Mode
+    # 0x800A = Experiment Value
+    exp_settings = client.read_holding_registers(0x8009, 2)
+    
+    # Build the experiment strings based on the returned data
+    if exp_settings.registers[0] == 1:
+        exp_mode = "Timer"
+        exp_val = str(exp_settings.registers[1]) + " seconds"
+    elif exp_settings.registers[0] == 2:
+        exp_mode = "Part_Counter"
+        exp_val = str(exp_settings.registers[1]) + " parts"
+    else:
+        exp_mode = "Free_Run"
+        exp_val = "N/A"
+    
+    # Write the metadata
+    mf.write("Data_File: PLCData-" + str(curr_date) + "-" + str(curr_time) + ".csv\n")
+    mf.write("Date: " + str(curr_date) + "\n")
+    mf.write("Time: " + str(curr_time) + "\n")
+    mf.write("Experiment_Mode: " + exp_mode + "\n")
+    mf.write("Experiment_Value: " + exp_val + "\n")
+    mf.write("Station_1_ProcessingTime: " + str(enclave_data.registers[1]) + " milliseconds\n")
+    mf.write("Station_2_ProcessingTime: " + str(enclave_data.registers[2]) + " milliseconds\n")
+    mf.write("Station_3_ProcessingTime: " + str(enclave_data.registers[3]) + " milliseconds\n")
+    mf.write("Station_4_ProcessingTime: " + str(enclave_data.registers[4]) + " milliseconds\n")
+    mf.write("Total_Parts: " + str(enclave_data.registers[0]) + "\n")
+    mf.write("Good_Parts: --\n")
+    mf.write("Rejected_Parts: --\n")
+    mf.write("Alarms: --\n")
+    # We're done with the file, so close it
+    mf.close()
+    
     print("Creating data file..."),
     # Build the file name
     fname = "./PLCData-" + str(curr_date) + "-" + str(curr_time) + ".csv"
@@ -46,46 +88,6 @@ if client.connect() == True:
     print("[DONE]")
     
     print("Exporting data..."),
-
-    # Grab the number of finished parts, and station processing times
-    # 0x8000 = Finished Parts
-    # 0x8001 = Station 1 Process Time
-    # 0x8002 = Station 2 Process Time
-    # 0x8003 = Station 3 Process Time
-    # 0x8004 = Station 4 Process Time
-    enclave_data = client.read_register(0x8000, 5)
-    # Grab the experiment mode and value
-    # 0x8009 = Experiment Mode
-    # 0x800A = Experiment Value
-    exp_settings = client.read_register(0x8009, 2)
-    
-    # Build the experiment strings based on the returned data
-    if exp_settings.registers[0] == 1:
-        exp_mode = "Timer"
-        exp_val = str(exp_settings.registers[1]) + " parts"
-    elif exp_settings.registers[0] == 2:
-        exp_mode = "Part Counter"
-        exp_val = str(exp_settings.registers[1]) + " seconds"
-    else:
-        exp_mode = "Free Run"
-        exp_val = "N/A"
-    
-    # Write the metadata
-    mf.write("Data_File: " + df.name + "\n")
-    mf.write("Date: " + str(curr_date) + "\n")
-    mf.write("Time: " + str(curr_time) + "\n")
-    mf.write("Experiment_Mode: " + exp_mode + "\n")
-    mf.write("Experiment_Value: " + exp_val + "\n")
-    mf.write("Station_1_ProcessingTime: " + str(enclave_data.registers[1]) + " milliseconds\n")
-    mf.write("Station_2_ProcessingTime: " + str(enclave_data.registers[2]) + " milliseconds\n")
-    mf.write("Station_3_ProcessingTime: " + str(enclave_data.registers[3]) + " milliseconds\n")
-    mf.write("Station_4_ProcessingTime: " + str(enclave_data.registers[4]) + " milliseconds\n")
-    mf.write("Total_Parts: " + str(enclave_data.registers[0]) + "\n")
-    mf.write("Good_Parts : --\n")
-    mf.write("Rejected_Parts: --\n")
-    mf.write("Alarms: --\n")
-    # We're done with the file, so close it
-    mf.close()
     
     # Maximum parts the PLC can track is currently 512; iterate through all
     for part in range(1,512):

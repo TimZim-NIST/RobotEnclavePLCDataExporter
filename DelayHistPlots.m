@@ -90,7 +90,7 @@ fprintf('Data File: \t%s\n\n', metadata_data_file)
 
 fprintf('Metadata\n========\n')
 fprintf('Date: \t\t\t%s\n', metadata_date)
-fprintf('Time: \t\t\t%s\n', metadata_time)
+fprintf('Time: \t\t\t%s EST\n', metadata_time)
 fprintf('Experiment Mode: \t%s\n', metadata_exp_mode)
 fprintf('Experiment Mode Value: \t%s\n', metadata_exp_val)
 fprintf('Station 1 Process Time: %s\n', metadata_sta1_proctime)
