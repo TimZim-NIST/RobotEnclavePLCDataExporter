@@ -11,7 +11,7 @@
 
 % Have the user select the DAT metadata file and parse it
 metadata_filename = uigetfile('*.dat', 'Select the PLC data file...');
-metadata_file = fopen(metadata_filename);
+metadata_file = fopen(strcat('data/',metadata_filename));
 metadata = textscan(metadata_file,'%s %s');
 fclose(metadata_file);
 
