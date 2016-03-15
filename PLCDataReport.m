@@ -31,7 +31,7 @@ metadata_rejectparts = metadata{2}{12};
 metadata_alarms = metadata{2}{13};
 
 % Use the CSV file referenced in the DAT file
-delay_data = importdata(metadata_data_file, ',');
+delay_data = importdata(strcat('data/', metadata_data_file), ',');
 
 % Calculate size of original array
 orig_arr_size = size(delay_data.data,1);
@@ -121,6 +121,8 @@ this_xlim_max = max(sta6_to_sta1_delay_msec) + 0.1;
 this_xlim_min = min(sta6_to_sta1_delay_msec) - 0.1;
 xlim([this_xlim_min this_xlim_max]);
 
+saveas(gcf, 'export/sta6to1.png');
+
 fprintf('Minimum Time: \t%.3f seconds\n', this_xlim_min)
 fprintf('Maximum Time: \t%.3f seconds\n', this_xlim_max)
 fprintf('Mean Time: \t%.3f seconds\n', mean(sta6_to_sta1_delay_msec))
@@ -140,6 +142,8 @@ this_xlim_max = max(sta1_delay_msec) + 0.1;
 this_xlim_min = min(sta1_delay_msec) - 0.1;
 xlim([this_xlim_min this_xlim_max]);
 
+saveas(gcf, 'export/sta1.png');
+
 fprintf('Minimum Time: \t%.3f seconds\n', this_xlim_min)
 fprintf('Maximum Time: \t%.3f seconds\n', this_xlim_max)
 fprintf('Mean Time: \t%.3f seconds\n', mean(sta1_delay_msec))
@@ -157,6 +161,8 @@ title('Station 1 to Station 2 Delay')
 this_xlim_max = max(sta1_to_sta2_delay_msec) + 0.1;
 this_xlim_min = min(sta1_to_sta2_delay_msec) - 0.1;
 xlim([this_xlim_min this_xlim_max]);
+
+saveas(gcf, 'export/sta1to2.png');
 
 fprintf('Minimum Time: \t%.3f seconds\n', this_xlim_min)
 fprintf('Maximum Time: \t%.3f seconds\n', this_xlim_max)
@@ -176,6 +182,8 @@ this_xlim_max = max(sta2_delay_msec) + 0.1;
 this_xlim_min = min(sta2_delay_msec) - 0.1;
 xlim([this_xlim_min this_xlim_max]);
 
+saveas(gcf, 'export/sta2.png');
+
 fprintf('Minimum Time: \t%.3f seconds\n', this_xlim_min)
 fprintf('Maximum Time: \t%.3f seconds\n', this_xlim_max)
 fprintf('Mean Time: \t%.3f seconds\n', mean(sta2_delay_msec))
@@ -193,6 +201,8 @@ title('Station 2 to Station 3 Delay')
 this_xlim_max = max(sta2_to_sta3_delay_msec) + 0.1;
 this_xlim_min = min(sta2_to_sta3_delay_msec) - 0.1;
 xlim([this_xlim_min this_xlim_max]);
+
+saveas(gcf, 'export/sta2to3.png');
 
 fprintf('Minimum Time: \t%.3f seconds\n', this_xlim_min)
 fprintf('Maximum Time: \t%.3f seconds\n', this_xlim_max)
@@ -212,6 +222,8 @@ this_xlim_max = max(sta3_delay_msec) + 0.1;
 this_xlim_min = min(sta3_delay_msec) - 0.1;
 xlim([this_xlim_min this_xlim_max]);
 
+saveas(gcf, 'export/sta3.png');
+
 fprintf('Minimum Time: \t%.3f seconds\n', this_xlim_min)
 fprintf('Maximum Time: \t%.3f seconds\n', this_xlim_max)
 fprintf('Mean Time: \t%.3f seconds\n', mean(sta3_delay_msec))
@@ -229,6 +241,8 @@ title('Station 3 to Station 4 Delay')
 this_xlim_max = max(sta3_to_sta4_delay_msec) + 0.1;
 this_xlim_min = min(sta3_to_sta4_delay_msec) - 0.1;
 xlim([this_xlim_min this_xlim_max]);
+
+saveas(gcf, 'export/sta3to4.png');
 
 fprintf('Minimum Time: \t%.3f seconds\n', this_xlim_min)
 fprintf('Maximum Time: \t%.3f seconds\n', this_xlim_max)
@@ -248,6 +262,8 @@ this_xlim_max = max(sta4_delay_msec) + 0.1;
 this_xlim_min = min(sta4_delay_msec) - 0.1;
 xlim([this_xlim_min this_xlim_max]);
 
+saveas(gcf, 'export/sta4.png');
+
 fprintf('Minimum Time: \t%.3f seconds\n', this_xlim_min)
 fprintf('Maximum Time: \t%.3f seconds\n', this_xlim_max)
 fprintf('Mean Time: \t%.3f seconds\n', mean(sta4_delay_msec))
@@ -266,6 +282,8 @@ this_xlim_max = max(sta6_delay_msec) + 0.1;
 this_xlim_min = min(sta6_delay_msec) - 0.1;
 xlim([this_xlim_min this_xlim_max]);
 
+saveas(gcf, 'export/sta6.png');
+
 fprintf('Minimum Time: \t%.3f seconds\n', this_xlim_min)
 fprintf('Maximum Time: \t%.3f seconds\n', this_xlim_max)
 fprintf('Mean Time: \t%.3f seconds\n', mean(sta6_delay_msec))
@@ -283,6 +301,8 @@ title('Part Production Time');
 this_xlim_max = max(total_part_time) + 0.1;
 this_xlim_min = min(total_part_time) - 0.1;
 xlim([this_xlim_min this_xlim_max]);
+
+saveas(gcf, 'export/total_production.png');
 
 fprintf('Minimum Time: \t%.3f seconds\n', this_xlim_min)
 fprintf('Maximum Time: \t%.3f seconds\n', this_xlim_max)
