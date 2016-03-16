@@ -13,6 +13,9 @@
 from pymodbus.client.sync import ModbusTcpClient as ModbusClient
 import time, datetime
 
+def calculate_timestamp(lo, hi):
+    return (hi * 65535) + lo
+
 mb_server_ip = "192.168.0.30"
 mb_server_port = "502"
 
@@ -85,7 +88,7 @@ if client.connect() == True:
     except:
         print("Error creating the data file!")
     # Write the column names
-    df.write("sn,sta1_delay,sta2_delay,sta3_delay,sta4_delay,sta6_delay,sta1_to_sta2_delay,sta2_to_sta3_delay,sta3_to_sta4_delay,sta6_to_sta1_delay,inspection_result\n")
+    df.write("sn,inspection_result,sta1_time,sta2_time,sta3_time,sta4_time,sta6_time,sta1_pickup_time,sta2_pickup_time,sta3_pickup_time,sta4_pickup_time,sta6_pickup_time\n")
     print("[DONE]")
     
     print("Exporting data..."),
@@ -97,20 +100,42 @@ if client.connect() == True:
         # PLC needs time to update before we read the data
         time.sleep(0.02)
         # Read the data
-        rd = client.read_input_registers(0x800A, 11)
+        rd = client.read_input_registers(0x800A, 22)
         # Part SN's (the first element) are updated as parts are presented
         # to Station 6, and are sequential. So, if the first element value
         # does not match the expected one, there is no more data to be exported.
         if rd.registers[0] != part:
             break
         else:
-            #print (rd.registers)
+            # We need to calculate the value of each timestamp based on the recorded HI and LO word 
+            # First two words are the SN and inspection result.
+            part_data = []
+            # Append the part SN and inspection result
+            part_data.append(rd.registers[0])
+            part_data.append(rd.registers[1])
+            # Append the arrival and departure timestamps
+            # Station 1
+            part_data.append(calculate_timestamp(rd.registers[2],rd.registers[3]))
+            part_data.append(calculate_timestamp(rd.registers[4],rd.registers[5]))
+            # Station 2
+            part_data.append(calculate_timestamp(rd.registers[6],rd.registers[7]))
+            part_data.append(calculate_timestamp(rd.registers[8],rd.registers[9]))
+            # Station 3
+            part_data.append(calculate_timestamp(rd.registers[10],rd.registers[11]))
+            part_data.append(calculate_timestamp(rd.registers[12],rd.registers[13]))
+            # Station 4
+            part_data.append(calculate_timestamp(rd.registers[14],rd.registers[15]))
+            part_data.append(calculate_timestamp(rd.registers[16],rd.registers[17]))
+            # Station 6
+            part_data.append(calculate_timestamp(rd.registers[18],rd.registers[19]))
+            part_data.append(calculate_timestamp(rd.registers[20],rd.registers[21]))
+            
             sdata = ""
             # Iterate through each element and add it to the CSV string
-            for word in rd.registers:
+            for data in part_data:
                 if sdata != "": 
                     sdata = sdata + ","
-                sdata = sdata + str(word)
+                sdata = sdata + str(data)
             # Write the data to the file, and add a new line
             df.write(sdata + "\n")
     # We're done with the file, so close it
