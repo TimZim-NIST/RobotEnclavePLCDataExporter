@@ -88,7 +88,7 @@ if client.connect() == True:
     except:
         print("Error creating the data file!")
     # Write the column names
-    df.write("sn,inspection_result,sta1_time,sta2_time,sta3_time,sta4_time,sta6_time,sta1_pickup_time,sta2_pickup_time,sta3_pickup_time,sta4_pickup_time,sta6_pickup_time\n")
+    df.write("sn,inspection_result,sta1_arr,sta1_dep,sta2_arr,sta2_dep,sta3_arr,sta3_dep,sta4_arr,sta4_dep,sta6_arr,sta6_dep\n")
     print("[DONE]")
     
     print("Exporting data..."),
@@ -108,7 +108,7 @@ if client.connect() == True:
             break
         else:
             # We need to calculate the value of each timestamp based on the recorded HI and LO word 
-            # First two words are the SN and inspection result.
+            # Reset the list
             part_data = []
             # Append the part SN and inspection result
             part_data.append(rd.registers[0])
