@@ -49,7 +49,12 @@ if client.connect() == True:
     # Grab the experiment mode and value
     # 0x8009 = Experiment Mode
     # 0x800A = Experiment Value
-    exp_settings = client.read_holding_registers(0x8009, 2)
+    # 0x800B = IGNORE
+    # 0x800C = Experiment Timestamp 0 [LSB]
+    # 0x800D = Experiment Timestamp 1
+    # 0x800E = Experiment Timestamp 2
+    # 0x800F = Experiment Timestamp 3 [MSB]
+    exp_settings = client.read_holding_registers(0x8009, 7)
     
     # Build the experiment strings based on the returned data
     if exp_settings.registers[0] == 1:
@@ -61,6 +66,11 @@ if client.connect() == True:
     else:
         exp_mode = "Free_Run"
         exp_val = "N/A"
+        
+    # Calculate the experiment start time in seconds and milliseconds
+    experiment_time_msec = (((exp_settings.registers[6] * 2**48) + (exp_settings.registers[5] * 2**32) + (exp_settings.registers[4] * 2**16) + exp_settings.registers[3]) - 116444736000000000) * (10**-4)
+    timestamp_sec = experiment_time_msec / 1000
+    timestamp_msec = experiment_time_msec % 1000
     
     # Write the metadata
     mf.write("Data_File: PLCData-" + str(curr_date) + "-" + str(curr_time) + ".csv\n")
@@ -68,6 +78,8 @@ if client.connect() == True:
     mf.write("Time: " + str(curr_time) + "\n")
     mf.write("Experiment_Mode: " + exp_mode + "\n")
     mf.write("Experiment_Value: " + exp_val + "\n")
+    mf.write("Experiment_Start_Seconds: %3.3f\n" % timestamp_sec)
+    #mf.write("Experiment_Start_Milliseconds: %3.0f\n" % timestamp_msec)
     mf.write("Station_1_ProcessingTime: " + str(enclave_data.registers[1]) + "\n")
     mf.write("Station_2_ProcessingTime: " + str(enclave_data.registers[2]) + "\n")
     mf.write("Station_3_ProcessingTime: " + str(enclave_data.registers[3]) + "\n")
@@ -88,7 +100,7 @@ if client.connect() == True:
     except:
         print("Error creating the data file!")
     # Write the column names
-    df.write("sn,inspection_result,sta1_arr,sta1_dep,sta2_arr,sta2_dep,sta3_arr,sta3_dep,sta4_arr,sta4_dep,sta6_arr,sta6_dep\n")
+    df.write("sn,inspection_result,timestamp_sec,timestamp_msec,sta1_arr,sta1_dep,sta2_arr,sta2_dep,sta3_arr,sta3_dep,sta4_arr,sta4_dep,sta6_arr,sta6_dep\n")
     print("[DONE]")
     
     print("Exporting data..."),
