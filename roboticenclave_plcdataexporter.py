@@ -100,7 +100,7 @@ if client.connect() == True:
     except:
         print("Error creating the data file!")
     # Write the column names
-    df.write("sn,inspection_result,timestamp_sec,timestamp_msec,sta1_arr,sta1_dep,sta2_arr,sta2_dep,sta3_arr,sta3_dep,sta4_arr,sta4_dep,sta6_arr,sta6_dep\n")
+    df.write("sn,inspection_result,sta1_arr,sta1_dep,sta2_arr,sta2_dep,sta3_arr,sta3_dep,sta4_arr,sta4_dep,sta6_arr,sta6_dep\n")
     print("[DONE]")
     
     print("Exporting data..."),
